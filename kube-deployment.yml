@@ -1,0 +1,26 @@
+# https://cloud.google.com/container-registry/docs/pushing-and-pulling?_ga=2.72903319.-586884957.1611153413&_gac=1.27856206.1625379545.CjwKCAjwlYCHBhAQEiwA4K21m0zCg3oc8ZjtJS6IIe5DcSNnN0zxD1HLgfvvsmkKTx9V2KxXMTJkcRoC1UgQAvD_BwE
+# asia.gcr.io/aspnet-repo/aspnetmvcminimal:v1
+# [START container_aspnet_deployment]
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: aspnetmvc
+  labels:
+    app: aspnetmvc
+spec:
+  selector:
+    matchLabels:
+      app: aspnetmvc
+  template:
+    metadata:
+      labels:
+        app: aspnetmvc
+    spec:
+      nodeSelector:
+        kubernetes.io/os: windows
+      containers:
+        - name: aspnetrun-app
+          image: asia.gcr.io/aspnet-repo/aspnetmvcminimal:v1
+          ports:
+            - containerPort: 8080
+# [END container_aspnet_deployment]
